@@ -1,4 +1,5 @@
 import React from "react";
+import Layout from "../../components/Layout";
 import { PostList } from "../../components/posts/PostList";
 import { postListType } from "../../types/api/post";
 
@@ -8,12 +9,12 @@ type postsProps = {
 
 function ListPage(props: postsProps) {  
   return (
-    <div>
-      
+    <Layout title="投稿一覧">
+      <h1>投稿一覧</h1>
       <div className="">total: {props.posts.totalCount}</div>
 
       {props.posts.contents && props.posts.contents.length ? <PostList posts={props.posts.contents} /> : <div>nothing content</div>}
-    </div>
+    </Layout>
   )
 }
 

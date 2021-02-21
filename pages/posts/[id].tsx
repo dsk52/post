@@ -1,5 +1,7 @@
 import { postListType, postType } from "../../types/api/post";
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths } from 'next';
+import React from "react";
+import Layout from "../../components/Layout";
 
 type PostDetailProps = {
   posts: postType
@@ -7,7 +9,7 @@ type PostDetailProps = {
 
 const PostDetail = (props: PostDetailProps) => {
   return (
-    <div>
+    <Layout title="投稿一覧">
       <main>
         <header>
           <h1>{props.posts.title}</h1>
@@ -15,7 +17,7 @@ const PostDetail = (props: PostDetailProps) => {
 
         <div className="body" dangerouslySetInnerHTML={{ __html: props.posts.body }}  />
       </main>
-    </div>
+      </Layout>
   )
 };
 
