@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import { PostList } from "../../components/posts/PostList";
+import { PostInteractor } from "../../interactors/posts/PostInteractor";
 import { postListType } from "../../types/api/post";
 
 type postsProps = {
@@ -19,13 +20,7 @@ function ListPage(props: postsProps) {
 }
 
 export async function getStaticProps() {
-  const MICROCMS_API_KEY = process.env.MICROCMS_API_KEY ? process.env.MICROCMS_API_KEY : '';
-  const response = await fetch("https://postdk.microcms.io/api/v1/post", {
-    headers: {
-      'X-API-KEY': MICROCMS_API_KEY
-    }
-  });
-  const posts: postListType = await response.json();
+  const posts = await new PostInteractor().getAll();
 
   return {
     props: {

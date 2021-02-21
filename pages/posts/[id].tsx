@@ -2,6 +2,7 @@ import { postListType, postType } from "../../types/api/post";
 import { GetStaticPaths } from 'next';
 import React from "react";
 import Layout from "../../components/Layout";
+import { PostInteractor } from "../../interactors/posts/PostInteractor";
 
 type PostDetailProps = {
   posts: postType
@@ -24,14 +25,11 @@ const PostDetail = (props: PostDetailProps) => {
 /**
  * 静的吐き出しをするサイトのpathを準備
  */
-export const getStaticPaths: GetStaticPaths = async () => {
-  const MICROCMS_API_KEY = process.env.MICROCMS_API_KEY ? process.env.MICROCMS_API_KEY : '';
-  const response = await fetch("https://postdk.microcms.io/api/v1/post", {
-    headers: {
-      'X-API-KEY': MICROCMS_API_KEY
-    }
-  });
-  const posts: postListType = await response.json();
+export const getStaticPaths = async () => {
+  const posts = await new PostInteractor().getAll();
+  if (posts === null) {
+    return;  // TODO ここの処理Next wayに乗る形で直したい
+  }
 
   const paths = await posts.contents.map((post) => ({
     params: { id: post.id },
@@ -43,14 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export async function getStaticProps({ params }) {
   const contentId = params?.id;
-
-  const MICROCMS_API_KEY = process.env.MICROCMS_API_KEY ? process.env.MICROCMS_API_KEY : '';
-  const response = await fetch(`https://postdk.microcms.io/api/v1/post/${contentId}`, {
-    headers: {
-      'X-API-KEY': MICROCMS_API_KEY
-    }
-  });
-  const posts: postType = await response.json();
+  const posts = await new PostInteractor().getById(contentId);
 
   return {
     props: {
