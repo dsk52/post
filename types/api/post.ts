@@ -1,12 +1,12 @@
 export type postListType = {
-  contents: postType[],
-  totalCount: Number;
-  offset: Number;
-  limit: Number;
-};
+  contents: postType[]
+  totalCount: number
+  offset: number
+  limit: number
+}
 
 export type postType = {
-  id: string;
-  title: string;
-  body: string;
+  id: string
+  title: string
+  body: string
 }
