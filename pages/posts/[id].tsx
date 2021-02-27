@@ -1,11 +1,17 @@
 import * as React from 'react'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetStaticPaths } from 'next'
 import { postType } from '../../types/api/post'
 import Layout from '../../components/Layout'
 import { PostInteractor } from '../../interactors/posts/PostInteractor'
 
 type PostDetailProps = {
   posts: postType
+}
+
+type Params = {
+  params: {
+    id: string
+  }
 }
 
 const PostDetail: React.FC<PostDetailProps> = (props: PostDetailProps) => {
@@ -27,9 +33,6 @@ const PostDetail: React.FC<PostDetailProps> = (props: PostDetailProps) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await new PostInteractor().getAll()
-  if (posts === null) {
-    return null // TODO ここの処理Next wayに乗る形で直したい
-  }
 
   const paths = await posts.contents.map((post) => ({
     params: { id: post.id },
@@ -38,8 +41,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const contentId = params?.id
+export const getStaticProps = async ({ params }: Params) => {
+  const contentId = params.id
+  if (!contentId) {
+    return
+  }
   const posts = await new PostInteractor().getById(contentId)
 
   return {

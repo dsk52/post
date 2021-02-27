@@ -10,21 +10,16 @@ class PostInteractor {
       : ''
   }
 
-  getAll = async (): Promise<postListType | null> => {
-    try {
-      const response = await fetch(this.BASE_URL, {
-        headers: {
-          'X-API-KEY': this._MICROCMS_API_KEY,
-        },
-      })
-      return await response.json()
-    } catch (error) {
-      console.error(error)
-      return null
-    }
+  getAll = async (): Promise<postListType> => {
+    const response = await fetch(this.BASE_URL, {
+      headers: {
+        'X-API-KEY': this._MICROCMS_API_KEY,
+      },
+    })
+    return await response.json()
   }
 
-  getById = async (contentId?: number): Promise<postType | null> => {
+  getById = async (contentId?: string): Promise<postType | null> => {
     if (contentId === null) {
       return null
     }
