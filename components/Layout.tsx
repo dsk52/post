@@ -1,36 +1,31 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
-import Head from 'next/head'
+import { MetaHead } from './MetaHead'
 
 type Props = {
   children?: ReactNode
   title?: string
+  description?: string
+  pagePath?: string
 }
 
 const Layout: React.FC<Props> = ({
   children,
-  title = 'This is the default title',
+  title = 'default title',
+  description = '',
+  pagePath = '',
 }: Props) => (
   <div>
-    <Head>
-      <title>{title}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
+    <MetaHead title={title} description={description} pagePath={pagePath} />
     <header>
       <nav>
         <Link href="/">
           <a>Home</a>
         </Link>{' '}
         |{' '}
-        <Link href="/about">
-          <a>About</a>
+        <Link href="/posts/list">
+          <a>List</a>
         </Link>{' '}
-        |{' '}
-        <Link href="/users">
-          <a>Users List</a>
-        </Link>{' '}
-        | <a href="/api/users">Users API</a>
       </nav>
     </header>
     {children}
