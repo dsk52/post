@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
+import { routes } from '../routes'
 import { MetaHead } from './MetaHead'
 
 type Props = {
@@ -19,12 +20,12 @@ const Layout: React.FC<Props> = ({
     <MetaHead title={title} description={description} pagePath={pagePath} />
     <header>
       <nav>
-        <Link href="/">
+        <Link href={routes.top}>
           <a>Home</a>
         </Link>{' '}
         |{' '}
-        <Link href="/posts/list">
-          <a>List</a>
+        <Link href={routes.post}>
+          <a>Posts</a>
         </Link>{' '}
       </nav>
     </header>
