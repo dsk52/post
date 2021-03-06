@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { GetStaticPaths } from 'next'
 import { postType } from '../../types/api/post'
-import Layout from '../../components/Layout'
+import Layout from '../../layouts/Layout'
 import { PostInteractor } from '../../interactors/posts/PostInteractor'
 
 type PostDetailProps = {

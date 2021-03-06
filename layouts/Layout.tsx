@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
 import { routes } from '../routes'
-import { MetaHead } from './MetaHead'
+import { MetaHead } from '../components/MetaHead'
 
 type Props = {
   children?: ReactNode

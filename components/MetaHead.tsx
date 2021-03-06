@@ -6,7 +6,11 @@ type Props = {
   pagePath: string
 }
 
-const MetaHead = ({ title, description, pagePath }: Props): JSX.Element => (
+export const MetaHead = ({
+  title,
+  description,
+  pagePath,
+}: Props): JSX.Element => (
   <Head>
     <title>{title}</title>
     <meta charSet="utf-8" />
@@ -22,5 +26,3 @@ const MetaHead = ({ title, description, pagePath }: Props): JSX.Element => (
     <meta property="og:url" content={`http://example.com/${pagePath}`} />
   </Head>
 )
-
-export { MetaHead }

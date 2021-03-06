@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Layout from '../components/Layout'
+import Layout from '../layouts/Layout'
 
 const IndexPage: React.FC = () => (
   <Layout title="Home | post">

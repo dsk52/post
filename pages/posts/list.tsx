@@ -1,6 +1,6 @@
 import React from 'react'
 import { GetStaticProps } from 'next'
-import Layout from '../../components/Layout'
+import Layout from '../../layouts/Layout'
 import { PostList } from '../../components/posts/PostList'
 import { PostInteractor } from '../../interactors/posts/PostInteractor'
 import { postListType } from '../../types/api/post'
