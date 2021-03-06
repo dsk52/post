@@ -1,0 +1,14 @@
+.postList {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.postListItem + .postListItem {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid #ededed;
+}
+
+.postTitle {
+  font-size: 1.2em;
+}
