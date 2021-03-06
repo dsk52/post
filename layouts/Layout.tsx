@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
-import { routes } from '../routes'
+import * as React from 'react'
 import { MetaHead } from '../components/MetaHead'
+import { Header } from './Header'
+import { Footer } from './Footer'
 
 type Props = {
-  children?: ReactNode
+  children?: React.ReactNode
   title?: string
   description?: string
   pagePath?: string
@@ -18,22 +18,9 @@ const Layout: React.FC<Props> = ({
 }: Props) => (
   <div>
     <MetaHead title={title} description={description} pagePath={pagePath} />
-    <header>
-      <nav>
-        <Link href={routes.top}>
-          <a>Home</a>
-        </Link>{' '}
-        |{' '}
-        <Link href={routes.post}>
-          <a>Posts</a>
-        </Link>{' '}
-      </nav>
-    </header>
+    <Header />
     {children}
-    <footer>
-      <hr />
-      <span>I&apos;m here to stay (Footer)</span>
-    </footer>
+    <Footer />
   </div>
 )
 
