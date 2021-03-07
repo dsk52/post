@@ -2,10 +2,10 @@ import * as React from 'react'
 import { GetStaticPaths } from 'next'
 import Layout from '../../layouts/Layout'
 import { PostInteractor } from '../../interactors/posts/PostInteractor'
-import { Post } from '../../types/domain/post'
+import { PostType } from '../../types/domain/post'
 
 type PostDetailProps = {
-  post: Post
+  post: PostType
 }
 
 type Params = {
@@ -20,6 +20,7 @@ const PostDetail: React.FC<PostDetailProps> = (props: PostDetailProps) => {
       <main>
         <header>
           <h1>{props.post.title}</h1>
+          <time>{props.post.publishedAt}</time>
         </header>
 
         <div
@@ -46,11 +47,11 @@ export const getStaticProps = async ({ params }: Params) => {
   if (!contentId) {
     return
   }
-  const posts = await new PostInteractor().getById(contentId)
+  const post = await new PostInteractor().getById(contentId)
 
   return {
     props: {
-      posts,
+      post,
     },
   }
 }

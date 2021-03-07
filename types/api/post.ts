@@ -1,4 +1,4 @@
-export type postListType = {
+export type postListBody = {
   contents: postBody[]
   totalCount: number
   offset: number

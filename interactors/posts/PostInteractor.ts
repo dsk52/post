@@ -1,5 +1,5 @@
-import { postBody, postListType } from '../../types/api/post'
-import { Post } from '../../types/domain/post'
+import { postBody } from '../../types/api/post'
+import { PostType, PostListType } from '../../types/domain/post'
 import { PostMapper } from './PostMappter'
 
 class PostInteractor {
@@ -12,16 +12,18 @@ class PostInteractor {
       : ''
   }
 
-  getAll = async (): Promise<postListType> => {
+  getAll = async (): Promise<PostListType> => {
     const response = await fetch(this.BASE_URL, {
       headers: {
         'X-API-KEY': this._MICROCMS_API_KEY,
       },
     })
-    return await response.json()
+    const responseBody = await response.json()
+
+    return PostMapper.mappingPostList(responseBody)
   }
 
-  getById = async (contentId?: string): Promise<Post | null> => {
+  getById = async (contentId?: string): Promise<PostType | null> => {
     if (contentId === null) {
       return null
     }
