@@ -3,10 +3,10 @@ import { GetStaticProps } from 'next'
 import Layout from '../../layouts/Layout'
 import { PostList } from '../../components/posts/PostList'
 import { PostInteractor } from '../../interactors/posts/PostInteractor'
-import { postListType } from '../../types/api/post'
+import { PostListType } from '../../types/domain/post'
 
 type postsProps = {
-  posts: postListType
+  posts: PostListType
 }
 
 const ListPage: React.FC<postsProps> = (props: postsProps) => {

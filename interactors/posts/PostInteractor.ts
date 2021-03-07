@@ -1,4 +1,6 @@
-import { postListType, postType } from '../../types/api/post'
+import { postBody } from '../../types/api/post'
+import { PostType, PostListType } from '../../types/domain/post'
+import { PostMapper } from './PostMappter'
 
 class PostInteractor {
   private readonly BASE_URL = 'https://postdk.microcms.io/api/v1/post'
@@ -10,16 +12,18 @@ class PostInteractor {
       : ''
   }
 
-  getAll = async (): Promise<postListType> => {
+  getAll = async (): Promise<PostListType> => {
     const response = await fetch(this.BASE_URL, {
       headers: {
         'X-API-KEY': this._MICROCMS_API_KEY,
       },
     })
-    return await response.json()
+    const responseBody = await response.json()
+
+    return PostMapper.mappingPostList(responseBody)
   }
 
-  getById = async (contentId?: string): Promise<postType | null> => {
+  getById = async (contentId?: string): Promise<PostType | null> => {
     if (contentId === null) {
       return null
     }
@@ -30,7 +34,9 @@ class PostInteractor {
           'X-API-KEY': this._MICROCMS_API_KEY,
         },
       })
-      return await response.json()
+      const body: postBody = await response.json()
+
+      return PostMapper.mappingPostDetail(body)
     } catch (error) {
       console.error(error)
       return null
