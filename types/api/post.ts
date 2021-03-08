@@ -1,16 +1,15 @@
-export type postListBody = {
+import { ListResponse, ObjectResponse } from './commonResponse'
+import { tagBody } from './tag'
+
+export type postListBody = ListResponse<{
   contents: postBody[]
   totalCount: number
   offset: number
   limit: number
-}
+}>
 
-export type postBody = {
-  id: string
+export type postBody = ObjectResponse<{
   title: string
   body: string
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
-  revisedAt: string
-}
+  tags: tagBody[]
+}>
