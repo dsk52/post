@@ -1,16 +1,8 @@
-export type postListBody = {
-  contents: postBody[]
-  totalCount: number
-  offset: number
-  limit: number
-}
+import { commonListResponse, commonObjectResponse } from './commonResponse'
 
-export type postBody = {
-  id: string
+export type postListBody = commonListResponse<postBody>
+
+export type postBody = commonObjectResponse<{
   title: string
   body: string
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
-  revisedAt: string
-}
+}>
